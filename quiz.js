@@ -1,25 +1,31 @@
 const questions = [
   {
-    question: '¿Cuál es la capital de Francia?',
-    options: ['Paris', 'Londres', 'Roma', 'Madrid'],
-    correctAnswer: 'Paris',
+    question: "¿Qué significa HTML?",
+    options: ["Hyper Text Markup Language", "High Tech Multi Language", "Home Tool Markup Language", "Hyperlink and Text Markup Language"],
+    correctAnswer: "Hyper Text Markup Language"
   },
   {
-    question: "¿Cuántos planetas hay en nuestro sistema solar?",
-    options: ["7", "8", "9", "10"],
-    correctAnswer: "8"
+    question: "¿Cuál es el lenguaje de programación principal para el desarrollo web?",
+    options: ["Java", "Python", "JavaScript", "C++"],
+    correctAnswer: "JavaScript"
   },
   {
-    question: "¿Cuál es el río más largo del mundo?",
-    options: ["Nilo", "Amazonas", "Misisipi", "Yangtsé"],
-    correctAnswer: "Amazonas"
+    question: "¿Qué significa CSS?",
+    options: ["Counter Style Sheet", "Computer Style Sheet", "Creative Style Sheet", "Cascading Style Sheet"],
+    correctAnswer: "Cascading Style Sheet"
   },
   {
-    question: "¿Cuántas estrellas hay en el cielo?",
-    options: ["1", "2", "3", "4"],
-    correctAnswer: "3"
+    question: "¿Cuál de las siguientes NO es una biblioteca de JavaScript?",
+    options: ["React", "jQuery", "Django", "Angular"],
+    correctAnswer: "Django"
   }
-]
+];
+
+// Ejemplo de cómo acceder a la primera pregunta y sus opciones
+console.log(questions[0].question); // "¿Qué significa HTML?"
+console.log(questions[0].options);  // ["Hyper Text Markup Language", "High Tech Multi Language", "Home Tool Markup Language", "Hyperlink and Text Markup Language"]
+console.log(questions[0].correctAnswer);  // "Hyper Text Markup Language"
+
 
 //score 
 let score = 0;
@@ -46,7 +52,6 @@ const loadQuestion = () => {
 
 //funcion para chequear la respuesta
 const selectAnswer = (selectedOption) => {
-
   const currentQuestion = questions[currentQuestionIndex];
   selectedOption === currentQuestion.correctAnswer ? score++ : null;
   //cargar la siguiente pregunta
