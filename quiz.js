@@ -21,15 +21,8 @@ const questions = [
   }
 ];
 
-// Ejemplo de cómo acceder a la primera pregunta y sus opciones
-console.log(questions[0].question); // "¿Qué significa HTML?"
-console.log(questions[0].options);  // ["Hyper Text Markup Language", "High Tech Multi Language", "Home Tool Markup Language", "Hyperlink and Text Markup Language"]
-console.log(questions[0].correctAnswer);  // "Hyper Text Markup Language"
-
-
-//score 
+//score del juego
 let score = 0;
-
 //indice actual de la pregunta 
 let currentQuestionIndex = 0;
 
@@ -48,38 +41,52 @@ const loadQuestion = () => {
     optionButton.addEventListener("click", () => selectAnswer(option));
     optionsContainer.appendChild(optionButton);
   })
-}
 
-//funcion para chequear la respuesta
-const selectAnswer = (selectedOption) => {
-  const currentQuestion = questions[currentQuestionIndex];
-  selectedOption === currentQuestion.correctAnswer ? score++ : null;
-  //cargar la siguiente pregunta
-  currentQuestionIndex++;
-  //si ya no hay preguntas, mostrar el puntaje
-  currentQuestionIndex < questions.length ? loadQuestion() : showScore();
-}
+  //funcion para chequear la respuesta
+  const selectAnswer = (selectedOption) => {
+    const currentQuestion = questions[currentQuestionIndex];
+    selectedOption === currentQuestion.correctAnswer ? score++ : null;
+    //cargar la siguiente pregunta
+    currentQuestionIndex++;
+    //si ya no hay preguntas, mostrar el puntaje
+    currentQuestionIndex < questions.length ? loadQuestion() : showScore();
+  }
 
-//funcion para ver el resultado 
-const showScore = () => {
-  const scoreResult = document.getElementById("result");
-  scoreResult.innerText = `Tu puntaje es ${score} de ${questions.length} preguntas`;
-  document.getElementById("options-container").innerHTML = "";
-  document.getElementById("question").innerHTML = "Quiz Terminado!!";
-  document.getElementById("submit-btn").style.display = "none";
-}
+  //funcion para ver el resultado 
+  const showScore = () => {
+    const scoreResult = document.getElementById("result");
+    scoreResult.innerText = `Tu puntaje es ${score} de ${questions.length} preguntas`;
+    document.getElementById("options-container").innerHTML = "";
+    document.getElementById("question").innerHTML = "Quiz Terminado!!";
+    document.getElementById("submit-btn").style.display = "none";
+  }
 
-//funcion para verificar la respuesta
-const checkAnswer = () => {
-  const selectedOption = document.querySelector("button:focus");
-  if (selectedOption) {
-    selectAnswer(selectedOption.innerText);
+  //funcion para verificar la respuesta
+  const checkAnswer = () => {
+    const selectedOption = document.querySelector("button:focus");
+    if (selectedOption) {
+      selectAnswer(selectedOption.innerText);
+    }
   }
 }
-//iniciar el quiz
+//iniciar el el juego
 loadQuestion();
 
+//funcion para reiniciar el juego
+const resetGame = () => {
+  currentQuestionIndex = 0;
+  score = 0;
+  loadQuestion();
+  document.getElementById("submit-btn").style.display = "block";
+  document.getElementById("question").innerHTML = "Preguntas";
+  document.getElementById("reset-btn").style.display = "none";
+  document.getElementById("result").innerHTML = "";
+}
 
+//boton de reinicio
+const resetBtn = document.getElementById("reset-btn");
 
-
+resetBtn.addEventListener("click", () => {
+  resetGame();
+})
 
